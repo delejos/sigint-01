@@ -1,0 +1,23 @@
+# Fish session state
+.config/fish/fish_variables
+
+# Compiled / generated
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets — sshd_config is included intentionally but scrubbed
+# Never commit private keys
+*.pem
+*.key
+id_rsa
+id_ed25519

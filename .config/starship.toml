@@ -1,0 +1,28 @@
+format = """
+[┌─](bold #1C4060)[$username](bold #4A9EBF)[@](bold #2A6080)[$hostname](bold #4A9EBF)[─](bold #1C4060)[$directory](bold #7EB8C9)[─](bold #1C4060)[$git_branch$git_status](bold #2A6080)
+[└─](bold #1C4060)[>](bold #2A6080)[>](bold #3A7090)[>](bold #4A9EBF) """
+
+[username]
+style_user = "bold #4A9EBF"
+style_root = "bold #7A3030"
+show_always = true
+
+[hostname]
+style = "bold #4A9EBF"
+ssh_only = false
+
+[directory]
+style = "bold #7EB8C9"
+truncation_length = 3
+truncate_to_repo = false
+
+[git_branch]
+format = "[$branch]($style)"
+style = "bold #2A6080"
+
+[git_status]
+style = "bold #2A6080"
+
+[character]
+success_symbol = ""
+error_symbol = ""

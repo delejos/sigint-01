@@ -1,0 +1,6 @@
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --remember --width 80 --asterisks --greeting 'SIGINT-01 // WARNING: This system is actively monitored. Authorized use only. Unauthorized access or use is prohibited and will be prosecuted to the full extent of applicable law.' --cmd start-hyprland"
+user = "greeter"

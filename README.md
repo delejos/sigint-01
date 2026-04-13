@@ -56,8 +56,8 @@ Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper a
 > Requires a base Arch Linux install with an internet connection. Run as your regular user — `sudo` access is needed for package installation and system config files.
 
 ```bash
-git clone https://github.com/delejos/sigint-01-dots.git ~/sigint-01-dots
-cd ~/sigint-01-dots
+git clone https://github.com/delejos/sigint-01.git ~/sigint-01
+cd ~/sigint-01
 chmod +x install.sh
 ./install.sh
 ```

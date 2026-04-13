@@ -662,8 +662,8 @@
         <button id="copy-btn" onclick="copyInstall()">COPY</button>
       </div>
       <pre id="install-code"><span class="comment"># Clone the repository</span>
-<span class="prompt">$ </span><span class="cmd">git clone https://github.com/delejos/sigint-01-dots.git ~/sigint-01-dots</span>
-<span class="prompt">$ </span><span class="cmd">cd ~/sigint-01-dots</span>
+<span class="prompt">$ </span><span class="cmd">git clone https://github.com/delejos/sigint-01.git ~/sigint-01</span>
+<span class="prompt">$ </span><span class="cmd">cd ~/sigint-01</span>
 
 <span class="comment"># Run installer — handles packages, symlinks, wallpapers, services</span>
 <span class="prompt">$ </span><span class="cmd">chmod +x install.sh && ./install.sh</span>
@@ -741,13 +741,13 @@
       <h2>ACCESS</h2>
     </div>
     <div class="links-row">
-      <a class="btn" href="https://github.com/delejos/sigint-01-dots" target="_blank">
+      <a class="btn" href="https://github.com/delejos/sigint-01" target="_blank">
         ↗ &nbsp;GITHUB REPOSITORY
       </a>
-      <a class="btn secondary" href="https://github.com/delejos/sigint-01-dots/blob/master/install.sh" target="_blank">
+      <a class="btn secondary" href="https://github.com/delejos/sigint-01/blob/master/install.sh" target="_blank">
         ↗ &nbsp;INSTALL SCRIPT
       </a>
-      <a class="btn secondary" href="https://github.com/delejos/sigint-01-dots/issues" target="_blank">
+      <a class="btn secondary" href="https://github.com/delejos/sigint-01/issues" target="_blank">
         ↗ &nbsp;REPORT ISSUE
       </a>
     </div>
@@ -757,7 +757,7 @@
 
 <footer>
   <span>SIGINT-01 &nbsp;—&nbsp; ARCH LINUX + HYPRLAND</span>
-  <span>UNCLASSIFIED // <a href="https://github.com/delejos/sigint-01-dots" target="_blank">GITHUB</a></span>
+  <span>UNCLASSIFIED // <a href="https://github.com/delejos/sigint-01" target="_blank">GITHUB</a></span>
 </footer>
 
 <script>
@@ -912,7 +912,7 @@
 
   // ── Copy install command ──
   function copyInstall() {
-    const raw = `git clone https://github.com/delejos/sigint-01-dots.git ~/sigint-01-dots\ncd ~/sigint-01-dots\nchmod +x install.sh && ./install.sh`;
+    const raw = `git clone https://github.com/delejos/sigint-01.git ~/sigint-01\ncd ~/sigint-01\nchmod +x install.sh && ./install.sh`;
     navigator.clipboard.writeText(raw).then(() => {
       const btn = document.getElementById('copy-btn');
       btn.textContent = 'COPIED';

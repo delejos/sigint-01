@@ -439,6 +439,54 @@
     .dot.warn { background: var(--warn); }
 
     /* ── Animations ── */
+    /* ── Hero screenshot ── */
+    .hero-shot {
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--border2);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-shot img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.85) saturate(0.9);
+    }
+    .hero-shot-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 10px 16px;
+      background: linear-gradient(transparent, rgba(7,12,18,0.95));
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    /* ── Color swatches ── */
+    .swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
+    .swatch {
+      flex: 1 1 120px;
+      padding: 28px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .swatch .swatch-name {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .swatch .swatch-hex {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+    }
+
     /* ── Gallery ── */
     .gallery {
       display: grid;
@@ -556,6 +604,12 @@
       <span><b>WORKSPACES</b> &nbsp;4</span>
       <span><b>STATUS</b> &nbsp;<span class="dot warn"></span>WORK IN PROGRESS</span>
     </div>
+  </div>
+
+  <!-- ── Hero screenshot ── -->
+  <div class="hero-shot fadeup">
+    <img src="screenshots/Alpha.png" alt="SIGINT-01 desktop — ALPHA workspace">
+    <div class="hero-shot-label">ALPHA // PRIMARY TERMINAL OPERATIONS</div>
   </div>
 
   <!-- ── WIP ── -->
@@ -734,10 +788,52 @@
     </div>
   </div>
 
+  <!-- ── Color palette ── -->
+  <section id="palette">
+    <div class="section-header">
+      <span class="num">07</span>
+      <h2>COLOR PALETTE</h2>
+    </div>
+    <div class="swatches">
+      <div class="swatch" style="background:#070C12;">
+        <span class="swatch-name">BACKGROUND</span>
+        <span class="swatch-hex">#070C12</span>
+      </div>
+      <div class="swatch" style="background:#0F1E2B;">
+        <span class="swatch-name">SURFACE</span>
+        <span class="swatch-hex">#0F1E2B</span>
+      </div>
+      <div class="swatch" style="background:#1C3347;">
+        <span class="swatch-name">BORDER</span>
+        <span class="swatch-hex">#1C3347</span>
+      </div>
+      <div class="swatch" style="background:#2A6080;">
+        <span class="swatch-name">ACTIVE BORDER</span>
+        <span class="swatch-hex">#2A6080</span>
+      </div>
+      <div class="swatch" style="background:#4A7A90;">
+        <span class="swatch-name">MUTED</span>
+        <span class="swatch-hex">#4A7A90</span>
+      </div>
+      <div class="swatch" style="background:#7EB8C9;">
+        <span class="swatch-name">ACCENT</span>
+        <span class="swatch-hex">#7EB8C9</span>
+      </div>
+      <div class="swatch" style="background:#8BAFC4;">
+        <span class="swatch-name">TEXT</span>
+        <span class="swatch-hex">#8BAFC4</span>
+      </div>
+      <div class="swatch" style="background:#C8D8E4;">
+        <span class="swatch-name">BRIGHT</span>
+        <span class="swatch-hex">#C8D8E4</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Links ── -->
   <section id="links">
     <div class="section-header">
-      <span class="num">07</span>
+      <span class="num">08</span>
       <h2>ACCESS</h2>
     </div>
     <div class="links-row">

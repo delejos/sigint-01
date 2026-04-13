@@ -51,6 +51,16 @@ Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper a
 
 ---
 
+## Requirements
+
+Before installing, make sure your system meets these:
+
+- **GPU** — Hyprland requires a GPU with proper Wayland drivers. AMD and Intel work out of the box. NVIDIA requires extra setup (`nvidia-drm.modeset=1`) and is not officially supported by Hyprland — test in a VM first if unsure.
+- **Font** — `JetBrains Mono Nerd Font` is a hard requirement. Without it, Waybar icons, the Starship prompt, and Fastfetch will render as broken squares. The install script handles this automatically via `ttf-jetbrains-mono-nerd`.
+- **Wayland session** — this build does not support X11.
+
+---
+
 ## Install
 
 > Requires a base Arch Linux install with an internet connection. Run as your regular user — `sudo` access is needed for package installation and system config files.
@@ -128,6 +138,12 @@ INSTALL_SSHD_CONFIG=1 ./install.sh
 │   └── ssh/            # /etc/ssh/sshd_config
 └── install.sh
 ```
+
+---
+
+## Credits
+
+Built from scratch. Color scheme generated with [matugen](https://github.com/InioX/matugen). Inspired by the broader Hyprland and r/unixporn community.
 
 ---
 

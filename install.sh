@@ -39,7 +39,7 @@ PACMAN_PKGS=(
     wireplumber pipewire pipewire-alsa pipewire-pulse
 
     # Fonts
-    ttf-jetbrains-mono ttf-font-awesome
+    ttf-jetbrains-mono-nerd ttf-font-awesome
 
     # Python (for wallpaper generation)
     python python-pillow

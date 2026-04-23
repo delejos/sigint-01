@@ -7,6 +7,11 @@ set $mod Mod4
 set $term kitty
 set $menu rofi -show drun
 
+# Lock screen — kitty fullscreen running scripts/lock.sh (tuigreet-style)
+# kitty is launched with class=sigint-lock so the for_window rule below
+# forces it floating + fullscreen + borderless over everything.
+set $lock kitty --class sigint-lock --title "SIGINT-01 // LOCKED" --override background=#070C12 --override foreground=#8BAFC4 --override font_size=12.0 --override cursor_shape=beam --override cursor_beam_thickness=1.5 bash -c "~/.local/bin/sigint-lock"
+
 # Workspace names — mirrors master branch
 set $ws1 "ALPHA"
 set $ws2 "MIKE"
@@ -45,6 +50,10 @@ input "type:touchpad" {
     pointer_accel 0.2
 }
 
+# ── Lock screen window rule ──────────────────────────────────
+# sigint-lock kitty window: floating fullscreen, no border, sticky across workspaces
+for_window [app_id="sigint-lock"] floating enable, fullscreen enable, border none, sticky enable
+
 # ── Appearance ───────────────────────────────────────────────
 gaps inner 3
 gaps outer 6
@@ -64,7 +73,7 @@ bar {
 }
 
 # ── Lid behavior ─────────────────────────────────────────────
-bindswitch lid:on  exec swaylock
+bindswitch lid:on  exec $lock
 bindswitch lid:off output eDP-1 enable
 
 # ── Floating modifier ────────────────────────────────────────
@@ -78,7 +87,7 @@ bindsym $mod+e           exec thunar
 bindsym $mod+v           floating toggle
 bindsym $mod+r           exec $menu
 bindsym $mod+f           fullscreen toggle
-bindsym $mod+l           exec swaylock
+bindsym $mod+l           exec $lock
 
 # ── Keybinds — Workspace switching ───────────────────────────
 bindsym $mod+1 exec ~/.config/sway/wallpaper.sh 1, workspace $ws1

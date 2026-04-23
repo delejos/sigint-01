@@ -46,6 +46,9 @@ PACMAN_PKGS=(
 
     # System
     greetd openssh
+
+    # Lock screen authentication
+    pamtester
 )
 
 YAY_PKGS=(
@@ -100,6 +103,11 @@ link_configs() {
 
     # Wallpaper generator script
     symlink "$REPO_DIR/scripts/generate_wallpapers.py" "$HOME/generate_wallpapers.py"
+
+    # Lock screen script — installed to ~/.local/bin/sigint-lock (on PATH)
+    mkdir -p "$HOME/.local/bin"
+    chmod +x "$REPO_DIR/scripts/lock.sh"
+    symlink "$REPO_DIR/scripts/lock.sh" "$HOME/.local/bin/sigint-lock"
 
     success "Configs linked."
 }

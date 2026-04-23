@@ -5,8 +5,8 @@
     "spacing": 0,
 
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window"
+        "sway/workspaces",
+        "sway/window"
     ],
 
     "modules-center": [
@@ -17,15 +17,23 @@
         "cpu",
         "memory",
         "temperature",
+        "backlight",
+        "battery",
         "network",
         "pulseaudio",
         "tray"
     ],
 
-    "hyprland/window": {
+    "sway/window": {
         "format": "// {title}",
-        "max-length": 50,
-        "separate-outputs": true
+        "max-length": 50
+    },
+
+    "sway/workspaces": {
+        "format": "[{name}]",
+        "on-click": "activate",
+        "on-scroll-up": "swaymsg workspace next",
+        "on-scroll-down": "swaymsg workspace prev"
     },
 
     "clock": {
@@ -54,6 +62,27 @@
         "tooltip": false
     },
 
+    "backlight": {
+        "format": "[BRT: {percent}%]",
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "battery": {
+        "format": "[BAT: {capacity}% {icon}]",
+        "format-charging": "[BAT: {capacity}% CHG]",
+        "format-plugged": "[BAT: {capacity}% PWR]",
+        "format-full": "[BAT: FULL]",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "interval": 30,
+        "tooltip": false
+    },
+
     "network": {
         "format-ethernet": "[NET: {ipaddr}]",
         "format-wifi": "[NET: {essid} {signalStrength}%]",
@@ -71,18 +100,5 @@
     "tray": {
         "spacing": 6,
         "icon-size": 14
-    }
-  },
-    "hyprland/workspaces": {
-        "format": "[{name}]",
-    "on-click": "activate",
-    "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1",
-    "persistent-workspaces": {
-        "ALPHA": [],
-        "MIKE": [],
-        "DELTA": [],
-        "ECHO": []
-        }
     }
 }

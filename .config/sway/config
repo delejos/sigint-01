@@ -1,0 +1,116 @@
+# SIGINT-01 // SWAY CONFIG
+# Target: Lenovo ThinkPad x280 — Intel UHD 620
+# Variant: sway-laptop branch
+
+# ── Variables ────────────────────────────────────────────────
+set $mod Mod4
+set $term kitty
+set $menu rofi -show drun
+
+# Workspace names — mirrors master branch
+set $ws1 "ALPHA"
+set $ws2 "MIKE"
+set $ws3 "DELTA"
+set $ws4 "ECHO"
+
+# ── Autostart ────────────────────────────────────────────────
+exec waybar
+exec dunst
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+exec ~/.config/sway/wallpaper.sh 1
+
+# ── Output ───────────────────────────────────────────────────
+# ThinkPad x280 internal display
+output eDP-1 {
+    scale 1
+    bg $HOME/Wallpapers/wallpaper-alpha.png fill
+}
+
+# ── Input — Keyboard ─────────────────────────────────────────
+input "type:keyboard" {
+    xkb_layout us
+    repeat_delay 300
+    repeat_rate 40
+}
+
+# ── Input — Touchpad (ThinkPad x280) ─────────────────────────
+input "type:touchpad" {
+    tap enabled
+    tap_button_map lrm
+    natural_scroll enabled
+    dwt enabled
+    middle_emulation enabled
+    scroll_factor 0.5
+    pointer_accel 0.2
+}
+
+# ── Appearance ───────────────────────────────────────────────
+gaps inner 3
+gaps outer 6
+default_border pixel 1
+default_floating_border pixel 1
+font pango:JetBrains Mono 10
+
+# Colors:              border   background text     indicator child_border
+client.focused         #2A6080  #0F1E2B    #E5E1E7  #2A6080   #2A6080
+client.focused_inactive #1C3347 #070C12    #4A7A90  #1C3347   #1C3347
+client.unfocused       #0F1E2B  #070C12    #1C3A4A  #0F1E2B   #0F1E2B
+client.urgent          #7A3030  #0F1E2B    #E5E1E7  #7A3030   #7A3030
+
+# ── Bar ──────────────────────────────────────────────────────
+bar {
+    swaybar_command waybar
+}
+
+# ── Lid behavior ─────────────────────────────────────────────
+bindswitch lid:on  exec swaylock
+bindswitch lid:off output eDP-1 enable
+
+# ── Floating modifier ────────────────────────────────────────
+floating_modifier $mod normal
+
+# ── Keybinds — Core ─────────────────────────────────────────
+bindsym $mod+Return      exec $term
+bindsym $mod+q           kill
+bindsym $mod+m           exit
+bindsym $mod+e           exec thunar
+bindsym $mod+v           floating toggle
+bindsym $mod+r           exec $menu
+bindsym $mod+f           fullscreen toggle
+bindsym $mod+l           exec swaylock
+
+# ── Keybinds — Workspace switching ───────────────────────────
+bindsym $mod+1 exec ~/.config/sway/wallpaper.sh 1, workspace $ws1
+bindsym $mod+2 exec ~/.config/sway/wallpaper.sh 2, workspace $ws2
+bindsym $mod+3 exec ~/.config/sway/wallpaper.sh 3, workspace $ws3
+bindsym $mod+4 exec ~/.config/sway/wallpaper.sh 4, workspace $ws4
+
+# ── Keybinds — Move window to workspace ──────────────────────
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+
+# ── Keybinds — Focus ─────────────────────────────────────────
+bindsym $mod+Left  focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up    focus up
+bindsym $mod+Down  focus down
+
+# ── Keybinds — Screenshot ────────────────────────────────────
+bindsym Print exec flameshot gui
+
+# ── Keybinds — Volume ────────────────────────────────────────
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# ── Keybinds — Backlight (ThinkPad hardware keys) ────────────
+bindsym XF86MonBrightnessUp   exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# ── Keybinds — Mouse window management ───────────────────────
+bindsym --whole-window $mod+button1 move
+bindsym --whole-window $mod+button3 resize

@@ -19,18 +19,18 @@ die()     { echo -e "${RED}[ERR]${NC}  $*"; exit 1; }
 
 PACMAN_PKGS=(
     # Wayland / Hyprland
-    hyprland hyprlock hyprpaper
+    sway swaylock swaybg swayidle
     waybar dunst
     polkit-gnome
     wl-clipboard cliphist
-    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
 
     # Terminal & shell
     kitty fish starship
 
     # CLI tools
     fastfetch btop neovim
-    eza bat
+    eza bat brightnessctl
 
     # Apps
     thunar flameshot firefox
@@ -91,7 +91,7 @@ link_configs() {
     mkdir -p "$CONFIG_DIR"
 
     # Directories
-    for dir in hypr waybar kitty fish fastfetch btop nvim flameshot; do
+    for dir in sway swaylock waybar kitty fish fastfetch btop nvim flameshot; do
         symlink "$REPO_DIR/.config/$dir" "$CONFIG_DIR/$dir"
     done
 
@@ -175,7 +175,7 @@ set_shell() {
 main() {
     echo ""
     echo -e "${CYAN}╔══════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║   SIGINT-01 // INSTALL   ║${NC}"
+    echo -e "${CYAN}║  SIGINT-01 // SWAY INSTALL  ║${NC}"
     echo -e "${CYAN}╚══════════════════════════════════════╝${NC}"
     echo ""
 

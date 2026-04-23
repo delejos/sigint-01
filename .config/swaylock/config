@@ -1,0 +1,27 @@
+# SIGINT-01 // SWAYLOCK CONFIG
+# Matches the steel blue color palette
+
+color=070C12
+bs-hl-color=2A6080
+key-hl-color=7EB8C9
+ring-color=1C3347
+ring-ver-color=2A6080
+ring-wrong-color=7A3030
+ring-clear-color=1C3347
+inside-color=070C12
+inside-ver-color=070C12
+inside-wrong-color=0F0808
+inside-clear-color=070C12
+line-color=070C12
+line-ver-color=070C12
+line-wrong-color=070C12
+text-color=8BAFC4
+text-ver-color=7EB8C9
+text-wrong-color=7A3030
+text-clear-color=4A7A90
+separator-color=00000000
+font=JetBrains Mono
+font-size=14
+indicator-radius=80
+indicator-thickness=4
+show-failed-attempts

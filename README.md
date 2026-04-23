@@ -1,20 +1,55 @@
-# SIGINT-01
+# SIGINT-01 // Sway Laptop
 
-A clean, dark Arch Linux + Hyprland setup built for people who live in the terminal. Designed to stay out of your way — no visual noise, no distractions, everything where you expect it.
+> **Branch:** `sway-laptop` — Lenovo ThinkPad x280 / Intel UHD 620 variant
+> **Desktop build (Hyprland):** see [`master`](https://github.com/delejos/sigint-01/tree/master)
 
-Built with IT work, pentesting, and VM-heavy workflows in mind. Four dedicated workspaces keep your environment organized without the clutter of a traditional desktop.
+A dark, minimal Sway setup for Intel laptop hardware. Same aesthetic, same workspace layout, same keybind philosophy as the master branch — built for Sway because it has rock-solid Intel iGPU support, runs cooler, and is more stable on ThinkPad hardware than Hyprland.
 
 ---
 
-## Why this build
+## Why Sway over Hyprland for this build
 
-Most desktop setups are either too minimal to be useful or too bloated to be fast. This one sits in between:
+- Hyprland can be unstable on Intel iGPU (UHD 620 / Iris Xe)
+- Sway (wlroots-based) has native, well-tested Intel Wayland support
+- Nearly identical keybind system — switching between branches feels the same
+- Lower CPU overhead — runs cooler on a ThinkPad, better battery life
+- `swaylock` replaces `hyprlock`, `swaybg` replaces `hyprpaper`
 
-- **Dark everywhere** — deep steel blue base, easy on the eyes during long sessions
-- **Keyboard-first** — rofi launcher, workspace switching, window management all on keybinds
-- **Low overhead** — Hyprland is a Wayland compositor that uses almost no resources idle
-- **Purpose-built workspaces** — one workspace per context so nothing bleeds into anything else
-- **Consistent look** — the same color palette flows through every component: terminal, bar, lock screen, fetch, monitor, wallpapers
+---
+
+## Target hardware
+
+| Field | Spec |
+|-------|------|
+| Machine | Lenovo ThinkPad x280 |
+| GPU | Intel UHD 620 |
+| Form factor | Laptop |
+| Display | eDP-1 (internal) |
+
+---
+
+## What changed from master
+
+| Component | Master (Hyprland) | This branch (Sway) |
+|-----------|-------------------|---------------------|
+| Window manager | `hyprland` | `sway` |
+| Lock screen | `hyprlock` | `swaylock` |
+| Wallpaper | `hyprpaper` | `swaybg` |
+| Portal | `xdg-desktop-portal-hyprland` | `xdg-desktop-portal-wlr` |
+| Backlight | — | `brightnessctl` |
+| Idle | — | `swayidle` |
+| Waybar modules | `hyprland/workspaces` | `sway/workspaces` |
+| Config location | `.config/hypr/` | `.config/sway/` |
+
+## What stays identical
+
+- Color palette (`#131317`, `#4AB8C9`, `#2A6080`)
+- Workspace names: ALPHA, MIKE, DELTA, ECHO
+- Kitty, Fish + Starship, Rofi, Neovim, Btop, Dunst, Fastfetch
+- Wallpaper generator (Python + Pillow)
+- greetd + tuigreet login manager
+- SSH hardening in `system/`
+- All keybinds (Super-based, keyboard-first)
 
 ---
 
@@ -23,11 +58,11 @@ Most desktop setups are either too minimal to be useful or too bloated to be fas
 | # | Name | Intended use |
 |---|------|--------------|
 | 1 | ALPHA | Primary terminal, system administration |
-| 2 | MIKE | General purpose, file management |
+| 2 | MIKE | Media management and analysis |
 | 3 | DELTA | Development, code editors, VMs |
 | 4 | ECHO | Browser, comms, research |
 
-Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper automatically.
+Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper automatically via `swaybg`.
 
 ---
 
@@ -35,9 +70,11 @@ Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper a
 
 | Component | Package |
 |-----------|---------|
-| Window manager | `hyprland` |
+| Window manager | `sway` |
 | Status bar | `waybar` |
-| Lock screen | `hyprlock` |
+| Lock screen | `swaylock` |
+| Wallpaper | `swaybg` |
+| Idle manager | `swayidle` |
 | Display manager | `greetd` + `tuigreet` |
 | Terminal | `kitty` |
 | Shell | `fish` + `starship` |
@@ -46,6 +83,7 @@ Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper a
 | Resource monitor | `btop` |
 | Editor | `neovim` |
 | Screenshots | `flameshot` |
+| Backlight | `brightnessctl` |
 | Notifications | `dunst` |
 | Wallpapers | custom-generated via Python + Pillow |
 
@@ -53,36 +91,30 @@ Each workspace has its own wallpaper. Switching workspaces swaps the wallpaper a
 
 ## Requirements
 
-Before installing, make sure your system meets these:
-
-- **GPU** — Hyprland requires a GPU with proper Wayland drivers. AMD and Intel work out of the box. NVIDIA requires extra setup (`nvidia-drm.modeset=1`) and is not officially supported by Hyprland — test in a VM first if unsure.
-- **Font** — `JetBrains Mono Nerd Font` is a hard requirement. Without it, Waybar icons, the Starship prompt, and Fastfetch will render as broken squares. The install script handles this automatically via `ttf-jetbrains-mono-nerd`.
+- **GPU** — Intel iGPU (UHD 620 or similar). AMD also works. NVIDIA is not supported on this branch.
+- **Font** — `JetBrains Mono Nerd Font` is required. Without it, Waybar icons, Starship prompt, and Fastfetch will render broken. The install script handles this via `ttf-jetbrains-mono-nerd`.
 - **Wayland session** — this build does not support X11.
 
 ---
 
 ## Install
 
-> Requires a base Arch Linux install with an internet connection. Run as your regular user — `sudo` access is needed for package installation and system config files.
-
 ```bash
-git clone https://github.com/delejos/sigint-01.git ~/sigint-01
+git clone -b sway-laptop https://github.com/delejos/sigint-01.git ~/sigint-01
 cd ~/sigint-01
 chmod +x install.sh
 ./install.sh
 ```
 
 The script handles everything:
-1. Installs all packages via `pacman` and `yay` (AUR helper installed automatically if missing)
-2. Symlinks configs from the repo into `~/.config/`
+1. Installs all packages via `pacman` and `yay`
+2. Symlinks configs into `~/.config/`
 3. Generates wallpapers into `~/Wallpapers/`
-4. Installs system configs (`/etc/greetd/config.toml`)
+4. Installs `/etc/greetd/config.toml`
 5. Enables `greetd`, `sshd`, and pipewire services
 6. Sets `fish` as your default shell
 
 ### Applying the hardened sshd_config
-
-The repo includes a minimal `sshd_config` with `PermitRootLogin no` and Protocol 2. It is skipped by default so you can review it first. To apply it:
 
 ```bash
 INSTALL_SSHD_CONFIG=1 ./install.sh
@@ -95,6 +127,7 @@ INSTALL_SSHD_CONFIG=1 ./install.sh
 - **btop theme** — open btop → `ESC` → Preferences → Color theme → select `sigint-01`
 - **Neovim plugins** — run `nvim` on first launch and let lazy.nvim sync
 - **Reboot** — greetd takes over as the display manager; reboot to activate it
+- **Backlight on first boot** — if brightness keys don't work, add yourself to the `video` group: `sudo usermod -aG video $USER`
 
 ---
 
@@ -105,7 +138,7 @@ INSTALL_SSHD_CONFIG=1 ./install.sh
 | `Super + Return` | Terminal (kitty) |
 | `Super + R` | App launcher (rofi) |
 | `Super + E` | File manager (thunar) |
-| `Super + L` | Lock screen |
+| `Super + L` | Lock screen (swaylock) |
 | `Super + Q` | Close window |
 | `Super + F` | Fullscreen |
 | `Super + V` | Toggle floating |
@@ -113,6 +146,17 @@ INSTALL_SSHD_CONFIG=1 ./install.sh
 | `Super + Shift + 1–4` | Move window to workspace |
 | `Super + Arrow keys` | Move focus |
 | `Print` | Screenshot (flameshot) |
+| `XF86MonBrightnessUp/Down` | Backlight ±5% |
+| `XF86AudioRaise/Lower/Mute` | Volume |
+
+---
+
+## Laptop-specific behavior
+
+- **Touchpad** — tap-to-click, natural scroll, disable-while-typing enabled
+- **Lid close** — triggers `swaylock` automatically
+- **Backlight** — scroll on Waybar backlight module also adjusts brightness
+- **Battery** — displayed in Waybar with charging/full/critical states
 
 ---
 
@@ -121,13 +165,14 @@ INSTALL_SSHD_CONFIG=1 ./install.sh
 ```
 .
 ├── .config/
-│   ├── hypr/           # hyprland.conf, hyprlock.conf, wallpaper.sh,
-│   │   └── scheme/     # workspace-watcher.sh, color scheme
-│   ├── waybar/         # config.jsonc, style.css
+│   ├── sway/           # config, wallpaper.sh
+│   ├── swaylock/       # config (matches color palette)
+│   ├── waybar/         # config.jsonc (sway modules + battery + backlight),
+│   │                   # style.css
 │   ├── kitty/          # kitty.conf
 │   ├── fish/           # config.fish
 │   ├── fastfetch/      # config.jsonc
-│   ├── btop/themes/    # sigint-01.theme, caelestia.theme
+│   ├── btop/themes/    # sigint-01.theme
 │   ├── nvim/           # colorscheme + plugins
 │   ├── flameshot/      # flameshot.ini
 │   └── starship.toml
@@ -141,20 +186,18 @@ INSTALL_SSHD_CONFIG=1 ./install.sh
 
 ---
 
-## Credits
-
-Built from scratch. Color scheme generated with [matugen](https://github.com/InioX/matugen). Inspired by the broader Hyprland and r/unixporn community.
-
----
-
 ## Color palette
-
-Dark steel blue base with cyan accents. Consistent across every component.
 
 | Role | Hex |
 |------|-----|
-| Background | `#131317` |
+| Background | `#070C12` |
 | Active border | `#2A6080` |
-| Accent | `#4AB8C9` |
-| Text | `#E5E1E7` |
-| Subtext | `#918F9A` |
+| Accent | `#7EB8C9` |
+| Text | `#8BAFC4` |
+| Subtext | `#4A7A90` |
+
+---
+
+## Credits
+
+Built from scratch. Color scheme generated with [matugen](https://github.com/InioX/matugen). Inspired by the broader Sway/wlroots and r/unixporn community.

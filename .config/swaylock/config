@@ -1,27 +1,64 @@
 # SIGINT-01 // SWAYLOCK CONFIG
-# Matches the steel blue color palette
+# Target: Intel iGPU laptops (UHD 620 / Iris Xe)
+# Minimal — no ring animations, solid fills only, asterisk feedback
 
+# ── Background ────────────────────────────────────────────────
+# Solid dark fill — no image, no GPU-intensive background rendering
 color=070C12
-bs-hl-color=2A6080
-key-hl-color=7EB8C9
+
+# ── Indicator — geometry ──────────────────────────────────────
+# Small radius keeps rendering lightweight on iGPU
+indicator-radius=60
+indicator-thickness=6
+
+# ── Indicator — ring colors ───────────────────────────────────
+# Flat colors only, no gradients
 ring-color=1C3347
 ring-ver-color=2A6080
 ring-wrong-color=7A3030
 ring-clear-color=1C3347
-inside-color=070C12
-inside-ver-color=070C12
-inside-wrong-color=0F0808
-inside-clear-color=070C12
-line-color=070C12
-line-ver-color=070C12
-line-wrong-color=070C12
+
+# ── Indicator — inside fill ───────────────────────────────────
+inside-color=0F1E2B
+inside-ver-color=0F1E2B
+inside-wrong-color=1A0808
+inside-clear-color=0F1E2B
+
+# ── Indicator — separator line ────────────────────────────────
+# Transparent — removes the hard edge between ring and fill
+line-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+line-clear-color=00000000
+separator-color=00000000
+
+# ── Text labels ───────────────────────────────────────────────
 text-color=8BAFC4
 text-ver-color=7EB8C9
-text-wrong-color=7A3030
+text-wrong-color=C94A4A
 text-clear-color=4A7A90
-separator-color=00000000
+
+# ── Font ─────────────────────────────────────────────────────
 font=JetBrains Mono
-font-size=14
-indicator-radius=80
-indicator-thickness=4
+font-size=13
+
+# ── Visual feedback — key input ───────────────────────────────
+# Shows asterisks while typing so user knows keystrokes are registering
+show-keyboard-indicator
+
+# Highlight key presses on the ring edge
+key-hl-color=4AB8C9
+bs-hl-color=2A6080
+
+# ── Visual feedback — caps lock ───────────────────────────────
+indicator-caps-lock
+caps-lock-key-hl-color=C9A84A
+caps-lock-bs-hl-color=7A5030
+
+# ── Attempt counter ───────────────────────────────────────────
+# Displays failed attempt count so user knows something went wrong
 show-failed-attempts
+
+# ── Message ──────────────────────────────────────────────────
+# Shown below the indicator — makes it obvious what the screen is for
+indicator-idle-visible

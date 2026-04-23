@@ -144,6 +144,17 @@ install_system_files() {
     else
         warn "Skipping sshd_config (set INSTALL_SSHD_CONFIG=1 to apply)"
     fi
+
+    # grub — suppress kernel messages bleeding into tuigreet on TTY1
+    if [ -f "$REPO_DIR/system/grub/grub" ]; then
+        sudo cp "$REPO_DIR/system/grub/grub" /etc/default/grub
+        success "Installed /etc/default/grub (quiet loglevel=3)"
+        info "Regenerating GRUB config..."
+        sudo grub-mkconfig -o /boot/grub/grub.cfg
+        success "GRUB config regenerated."
+    else
+        warn "system/grub/grub not found — skipping GRUB configuration"
+    fi
 }
 
 # ── 5. Service enablement ────────────────────────────────────

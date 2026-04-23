@@ -1,0 +1,15 @@
+# SIGINT-01 // GRUB defaults — sigint-01-sway branch
+# Installed to /etc/default/grub by install.sh
+# quiet loglevel=3 suppresses kernel messages from bleeding into tuigreet on TTY1
+
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=3
+GRUB_DISTRIBUTOR="SIGINT-01"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3"
+GRUB_CMDLINE_LINUX=""
+
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TERMINAL_INPUT=console
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
